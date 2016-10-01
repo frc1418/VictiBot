@@ -21,7 +21,7 @@ async def on_message(message):
     def interaction(input):
         # Stuff do do when people ask questions to the bot (i.e. 'where is the robot code' or 'are there any upcoming deadlines', etc...)
         # I don't mean like siri, but it would be cool to have a bot that is actually helpful
-        if input = 'Hello'
+        if input == 'Hello':
             return 'World'
 
     # This stuff is for special commands that require the bot to do more than just respond with an answer
@@ -37,7 +37,7 @@ async def on_message(message):
         # Set some variable to do something for some purpose
 
     # Respond to user questions with answers from the interction function
-    if skip_interaction = False:
+    if not skip_interaction:
         client.send_message(message.channel, interaction(message.content))
 
 client.run('MjMxNTk1NjEwNjgyMjk0Mjcy.CtCx0g.OhIC5GKMiGM6JMbhos5rQcb8FkE')
