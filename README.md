@@ -4,6 +4,8 @@ A simple chatbot for Vae Victis Team 1418's Discord server.
 
 A work in progress. Feel free to suggest features in the issues.
 
+You'll need to add a token to the end of `bot.py` for this bot to connect to its user counterpart properly.
+
 # Contributors
 * [Erik Boesen](https://github.com/ErikBoesen)
 
