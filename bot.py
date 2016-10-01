@@ -18,8 +18,15 @@ async def on_message(message):
         # This function will be
         # Stuff do do when people ask questions to the bot (i.e. 'where is the robot code' or 'are there any upcoming deadlines', etc...)
         # I don't mean like siri, but it would be cool to have a bot that is actually helpful
-        if input == 'Hello':
-            return 'World'
+
+        message_index = {
+            'Hello': 'World',
+            'VictiBot': 'Victibot is a work-in-progress chatbot for the team 1418 server. More info on GitHub at https://github.com/ErikBoesen/victibot'
+        }
+        try:
+            return message_index[input]
+        except:
+            pass
 
     # This stuff is for special commands that require the bot to do more than just respond with an answer
     # We should standardize this so that all commands begin with a ! or something like that
