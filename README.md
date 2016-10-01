@@ -20,6 +20,7 @@ A work in progress. Feel free to suggest features in the issues.
 
 ## Contributors
 * [Erik Boesen](https://github.com/ErikBoesen)
+* [Adrian Hall](https://github.com/Aderhall)
 
 ## License
 This software is protected under the MIT License. Basically, be nice and give credit where such is due. Oh, and also, if you use this bot to do evil things, we're not liable.
