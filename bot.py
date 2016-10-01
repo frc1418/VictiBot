@@ -9,6 +9,9 @@ client = discord.Client()
 message_index = {
     '!ping': 'Pong!',
     '!hello': 'World!'
+    'hey victibot' : 'I\'m not Siri'
+    'ok victibot' : 'I\'m not Google now'
+    'okay victibot' : 'I\'m not Google now'
 }
 
 
