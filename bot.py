@@ -9,9 +9,6 @@ client = discord.Client()
 message_index = {
     '!ping': 'Pong!',
     '!hello': 'World!'
-    'hey victibot' : 'I\'m not Siri'
-    'ok victibot' : 'I\'m not Google now'
-    'okay victibot' : 'I\'m not Google now'
 }
 
 
@@ -30,8 +27,12 @@ async def on_message(message):
     # TODO: Prevent bot from triggering itself.
 
     # Special returns!
-    if message.content.startswith('!about'):
+    if message.content.lower().startswith('!about'):
         await client.send_message(message.channel, 'Victibot is a chatbot for Team 1418\'s Discord server. Bot is currently running as ' + client.user.name + ' (ID ' + client.user.id + '). View on GitHub: https://github.com/ErikBoesen/victibot')
+    elif message.content.lower().startswith('hey victibot'):
+        await client.send_message(message.channel, 'Thanks, but I\'m not Siri (yet).')
+    elif message.content.lower().startswith('ok victibot') or message.content.lower().startswith('okay victibot'):
+        await client.send_message(message.channel, 'Thanks, but I\'m not Google Now (yet).')
     else:
         # Respond if the message has a basic, static response.
         # TODO: Apparently 'await' has been replaced in py3 with 'yield from'.
