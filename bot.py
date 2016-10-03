@@ -3,8 +3,8 @@ import asyncio
 import subprocess
 client = discord.Client()
 def xkcd():
-    html = subprocess.Popen('curl xkcd.com', shell=True, stdout=subprocess.PIPE).stdout.read()
-    html = html[121:150]
+    htmlo = subprocess.Popen('curl xkcd.com', shell=True, stdout=subprocess.PIPE).stdout.read()
+    html = htmlo[121:150]
     html = str(html)
     comic_title = ""
     loop = True
@@ -20,7 +20,19 @@ def xkcd():
     print (comic_title)
     print ('curl -O imgs.xkcd.com/comics/' + comic_title + '.png')
     comic_title = comic_title.lower()
-    return 'https://imgs.xkcd.com/comics/' + comic_title[2:] + '.png'
+    titletext = ''
+    loop = True
+    print (titletext)
+    for a in str(htmlo[2805:]):
+        if loop == True:
+            if not a == '"':
+                print (a)
+                titletext += str(a)
+            else:
+                print ('something else happened')
+                loop = False
+    print (titletext)
+    return titletext[2:] + '\nhttps://imgs.xkcd.com/comics/' + comic_title[2:] + '.png'
 
 # A dictionary of basic things for the bot to return. More complex (i.e.
 # data-driven) interactions aren't stored here, those go below.
