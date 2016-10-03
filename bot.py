@@ -33,6 +33,8 @@ async def on_message(message):
         await client.send_message(message.channel, 'Thanks, but I\'m not Siri (yet).')
     elif message.content.lower().startswith('ok victibot') or message.content.lower().startswith('okay victibot'):
         await client.send_message(message.channel, 'Thanks, but I\'m not Google Now (yet).')
+    elif message.content.lower().startswith('xcq') or message.content.lower().startswith('rickroll'):
+        await client.send_message(message.channel, 'Never Gonna Give You Up - Rick Astley: \n https://www.youtube.com/watch?v=dQw4w9WgXcQ')
     else:
         # Respond if the message has a basic, static response.
         # TODO: Apparently 'await' has been replaced in py3 with 'yield from'.
