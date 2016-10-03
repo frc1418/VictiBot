@@ -35,7 +35,7 @@ async def on_message(message):
         await client.send_message(message.channel, 'Thanks, but I\'m not Google Now (yet).')
     elif message.content.lower().startswith('xcq') or message.content.lower().startswith('rickroll'):
         await client.send_message(message.channel, 'Never Gonna Give You Up - Rick Astley: \n https://www.youtube.com/watch?v=dQw4w9WgXcQ')
-    elif message.content.lower().startswith('h ') or message.content.lower().startswith('H '):
+    elif message.content.lower().startswith('h') or message.content.lower().startswith('H'):
         await client.send_message(message.channel, 'H has been pressed. H4X1N6 1MM1N3N7.')
     else:
         # Respond if the message has a basic, static response.
