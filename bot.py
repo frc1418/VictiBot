@@ -9,7 +9,7 @@ def xkcd():
     comic_title = ""
     loop = True
     for i in html:
-        if loop == True:
+        if loop:
             if not i == '<':
                 print (i)
                 comic_title += str(i)
@@ -24,7 +24,7 @@ def xkcd():
     loop = True
     print (titletext)
     for a in str(htmlo[2805:]):
-        if loop == True:
+        if loop:
             if not a == '"':
                 print (a)
                 titletext += str(a)
@@ -38,14 +38,16 @@ def xkcd():
 # data-driven) interactions aren't stored here, those go below.
 message_index = {
     '!ping': 'Pong!',
-    '!hello': 'World!'
+    '!hello': 'World!',
+    'rickroll': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    'xcq': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
 }
 
 
 @client.event
 async def on_ready():
     """Run when the bot is ready."""
-    print('Logged in as' + client.user.name + ' (ID ' + client.user.id + ').')
+    print('Logged in as ' + client.user.name + ' (ID ' + client.user.id + ').')
     print('------')
 
 
@@ -68,6 +70,8 @@ async def on_message(message):
             await client.send_message(message.channel, 'Never Gonna Give You Up - Rick Astley: \n https://www.youtube.com/watch?v=dQw4w9WgXcQ')
         elif msg.startswith('xkcd'):
             await client.send_message(message.channel,  (xkcd()))
+        elif msg == 'it\'s time to stop' or msg == 'minecraft' or msg == 'league of legends' or msg == 'stop':
+            await client.send_message(message.channel, 'https://www.youtube.com/watch?v=2k0SmqbBIpQ')
         else:
             # Respond if the message has a basic, static response.
             # TODO: Apparently 'await' has been replaced in py3 with 'yield from'.
