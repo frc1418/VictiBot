@@ -1,7 +1,11 @@
 import discord
 import asyncio
 import subprocess
+import os
 client = discord.Client()
+fd = os.open(".gitignore",os.O_RDWR)
+token = os.read(fd,100)[2:62]
+token = (str(token)[2:61])
 def xkcd():
     htmlo = subprocess.Popen('curl xkcd.com', shell=True, stdout=subprocess.PIPE).stdout.read()
     html = htmlo[121:150]
@@ -82,4 +86,4 @@ async def on_message(message):
                 pass
 
 
-client.run('MjMxNTk1NjEwNjgyMjk0Mjcy.CtCx0g.OhIC5GKMiGM6JMbhos5rQcb8FkE')
+client.run(token)
