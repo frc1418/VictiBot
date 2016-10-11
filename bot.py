@@ -3,7 +3,7 @@ import asyncio
 import subprocess
 import os
 client = discord.Client()
-fd = os.open(".gitignore",os.O_RDWR)
+fd = os.open("token.txt",os.O_RDWR)
 token = os.read(fd,100)[2:62]
 token = (str(token)[2:61])
 def xkcd():
