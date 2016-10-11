@@ -76,6 +76,9 @@ async def on_message(message):
             await client.send_message(message.channel,  (xkcd()))
         elif msg == 'it\'s time to stop' or msg == 'minecraft' or msg == 'league of legends' or msg == 'stop':
             await client.send_message(message.channel, 'https://www.youtube.com/watch?v=2k0SmqbBIpQ')
+        elif msg == '!update':
+            await client.send_message(message.channel, 'Updating...')
+            print str(subprocess.Popen('git checkout HEAD bot.py', shell=True, stdout=subprocess.PIPE).stdout.read())
         else:
             # Respond if the message has a basic, static response.
             # TODO: Apparently 'await' has been replaced in py3 with 'yield from'.
