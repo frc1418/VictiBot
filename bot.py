@@ -76,7 +76,8 @@ async def on_member_remove(member):
 
 # Get token from token.txt.
 with open('token.txt', 'r') as token_file:
-    token = token_file.read()
+    # Parse into a string, and get rid of trailing newlines.
+    token = token_file.read().replace('\n', '')
 
 print('Starting with token ' + token + '...')
 
