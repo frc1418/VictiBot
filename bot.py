@@ -66,12 +66,12 @@ async def on_message(message):
 
 @client.event
 async def on_member_join(member):
-    await client.send_message(member.server, member + ' has joined the server!')
+    await client.send_message(member.server.default_channel, '**Welcome ' + member.mention + ' to the ' + member.server.name + ' server!**')
 
 
 @client.event
 async def on_member_remove(member):
-    await client.send_message(member.server, member + ' has left the server!')
+    await client.send_message(member.server.default_channel, member.name + ' left the server :frowning: RIP ' + member.name)
 
 
 # Get token from token.txt.
