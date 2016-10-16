@@ -12,14 +12,18 @@ client = discord.Client()
 #bot prefix
 PREFIX = '!'
 
-# A dictionary of basic things for the bot to return. More complex (i.e.
+# Two dictionaries (prefix commands and text triggers) of basic things for the bot to return. More complex (i.e.
 # data-driven) interactions aren't stored here, those go below.
+prefixMessageIndex = {
+    # Returns the corresponding value if preceeded by the PREFIX
+    'ping': 'Pong!',
+    'hello': 'World!',
+    'balloumoji': ':bigdissapointment::moustache::ballouminatti::1982::nope::notapproved::fedora1::happy::flowers::notbad::soundboard:'
+}
 messageIndex = {
-    PREFIX + 'ping': 'Pong!',
-    PREFIX + 'hello': 'World!',
+    # Returns the corresponding text unless it interferes with a command beginning with the PREFIX
     'rickroll': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     'xcq': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-    PREFIX + 'balloumoji': ':bigdissapointment::moustache::ballouminatti::1982::nope::notapproved::fedora1::happy::flowers::notbad::soundboard:',
     'it\'s time to stop': 'https://www.youtube.com/watch?v=2k0SmqbBIpQ',
     'stop': 'https://www.youtube.com/watch?v=2k0SmqbBIpQ'
 }
@@ -51,7 +55,8 @@ async def on_message(message):
             r = requests.get('http://xkcd.com/' + comic + '/info.0.json' if comic else 'http://xkcd.com/info.0.json')
 
             # Send the URL of the image from the JSON fetched above.
-            await client.send_message(message.channel, r.json()['img'])
+            # The title text is half of the comic
+            await client.send_message(message.channel, r.json()['alt']+'\n'+r.json()['img'])
         elif msg == (PREFIX + 'update'):
             # Confirm that the bot is updating
             await client.send_message(message.channel, 'Updating...')
@@ -62,9 +67,13 @@ async def on_message(message):
             # TODO: Apparently 'await' has been replaced in py3 with 'yield from'.
             # Implement this change.
             try:
-                await client.send_message(message.channel, messageIndex[msg])
+                # Prefix commands take priority over standard text commands
+                await client.send_message(message.channel, prefixMessageIndex[PREFIX+msg])
             except:
-                pass
+                try:
+                    await client.send_message(message.channel, messageIndex[msg])
+                except:
+                    pass
 
 
 @client.event
