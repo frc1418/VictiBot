@@ -47,7 +47,7 @@ async def on_message(message):
         # Special returns!
         if msg.startswith(PREFIX + 'about'):
             await client.send_message(message.channel, 'Victibot is a chatbot for Team 1418\'s Discord server. Bot is currently running as ' + client.user.name + ' (ID ' + client.user.id + '). View on GitHub: https://github.com/ErikBoesen/victibot')
-        elif msg.startswith(PREFIX + 'xkcd'):
+        elif msg.startswith('xkcd'):
             # Store the number/other content after the '!xkcd '.
             comic = msg[6:]
 
