@@ -4,7 +4,7 @@ import asyncio
 import subprocess
 import requests
 import json
-
+import os
 # Initialize bot client
 # TODO: Make bot a class like normal bots.
 client = discord.Client()
@@ -25,7 +25,8 @@ messageIndex = {
     'rickroll': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     'xcq': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     'it\'s time to stop': 'https://www.youtube.com/watch?v=2k0SmqbBIpQ',
-    'stop': 'https://www.youtube.com/watch?v=2k0SmqbBIpQ'
+    'stop': 'https://www.youtube.com/watch?v=2k0SmqbBIpQ',
+    'harambe' : ' :harambe: '
 }
 
 
@@ -34,7 +35,9 @@ async def on_ready():
     """Run when the bot is ready."""
     print('Logged in as ' + client.user.name + ' (ID ' + client.user.id + ').')
     print('------')
+    # Turns out this is annoying
     await client.send_message(client.get_channel('228121885630529536'), 'Victibot is online and ready! Currently running as ' + client.user.name + ' (ID ' + client.user.id + ').')
+    await client.send_message(client.get_channel('238267526792871936'), 'Victibot is online and ready! Currently running as ' + client.user.name + ' (ID ' + client.user.id + ').')
 
 @client.event
 async def on_message(message):
@@ -49,27 +52,31 @@ async def on_message(message):
             await client.send_message(message.channel, 'Victibot is a chatbot for Team 1418\'s Discord server. Bot is currently running as ' + client.user.name + ' (ID ' + client.user.id + '). View on GitHub: https://github.com/ErikBoesen/victibot')
         elif msg.startswith('xkcd'):
             # Store the number/other content after the '!xkcd '.
-            comic = msg[6:]
+            comic = msg[5:]
 
             # If the user included a specific comic number in their message, get the JSON data for that comic. Otherwise, get the JSON data for the most recent comic.
             r = requests.get('http://xkcd.com/' + comic + '/info.0.json' if comic else 'http://xkcd.com/info.0.json')
 
             # Send the URL of the image from the JSON fetched above.
             # The title text is half of the comic
-            await client.send_message(message.channel, r.json()['alt']+'\n'+r.json()['img'])
+            await client.send_message(message.channel, r.json()['img'])
+            await client.send_message(message.channel, r.json()['alt'])
         elif msg == (PREFIX + 'update'):
             # Confirm that the bot is updating
             await client.send_message(message.channel, 'Updating...')
             # Start a git pull to update bot
             print(str(subprocess.Popen('git pull', shell=True, stdout=subprocess.PIPE).stdout.read()))
-            sys.exit()
+            await client.send_message(message.channel, 'Update Successful! Restarting...')
+            # Restart
+            os.system('python3 launch.py')
         else:
             # Respond if the message has a basic, static response.
             # TODO: Apparently 'await' has been replaced in py3 with 'yield from'.
             # Implement this change.
             try:
                 # Prefix commands take priority over standard text commands
-                await client.send_message(message.channel, prefixMessageIndex[PREFIX+msg])
+                await client.send_message(message.channel, prefixMessageIndex[(msg[1:])])
+                print ('Prefix Done')
             except:
                 try:
                     await client.send_message(message.channel, messageIndex[msg])
