@@ -34,7 +34,7 @@ async def on_ready():
     """Run when the bot is ready."""
     print('Logged in as ' + client.user.name + ' (ID ' + client.user.id + ').')
     print('------')
-
+    await client.send_message(client.get_channel('228121885630529536'), 'Victibot is online and ready! Currently running as ' + client.user.name + ' (ID ' + client.user.id + ').')
 
 @client.event
 async def on_message(message):
@@ -62,6 +62,7 @@ async def on_message(message):
             await client.send_message(message.channel, 'Updating...')
             # Start a git pull to update bot
             print(str(subprocess.Popen('git pull', shell=True, stdout=subprocess.PIPE).stdout.read()))
+            sys.exit()
         else:
             # Respond if the message has a basic, static response.
             # TODO: Apparently 'await' has been replaced in py3 with 'yield from'.
