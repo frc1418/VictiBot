@@ -49,7 +49,7 @@ async def on_message(message):
             await client.send_message(message.channel, 'Victibot is a chatbot for Team 1418\'s Discord server. Bot is currently running as ' + client.user.name + ' (ID ' + client.user.id + '). View on GitHub: https://github.com/ErikBoesen/victibot')
         elif msg.startswith('xkcd'):
             # Store the number/other content after the '!xkcd '.
-            comic = msg[6:]
+            comic = msg[5:]
 
             # If the user included a specific comic number in their message, get the JSON data for that comic. Otherwise, get the JSON data for the most recent comic.
             r = requests.get('http://xkcd.com/' + comic + '/info.0.json' if comic else 'http://xkcd.com/info.0.json')
