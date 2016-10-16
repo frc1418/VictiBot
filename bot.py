@@ -15,11 +15,11 @@ PREFIX = '!'
 # A dictionary of basic things for the bot to return. More complex (i.e.
 # data-driven) interactions aren't stored here, those go below.
 messageIndex = {
-    Prefix + 'ping': 'Pong!',
-    Prefix + 'hello': 'World!',
+    PREFIX + 'ping': 'Pong!',
+    PREFIX + 'hello': 'World!',
     'rickroll': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     'xcq': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-    Prefix + 'balloumoji': ':bigdissapointment::moustache::ballouminatti::1982::nope::notapproved::fedora1::happy::flowers::notbad::soundboard:',
+    PREFIX + 'balloumoji': ':bigdissapointment::moustache::ballouminatti::1982::nope::notapproved::fedora1::happy::flowers::notbad::soundboard:',
     'it\'s time to stop': 'https://www.youtube.com/watch?v=2k0SmqbBIpQ',
     'stop': 'https://www.youtube.com/watch?v=2k0SmqbBIpQ'
 }
