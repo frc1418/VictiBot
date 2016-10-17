@@ -70,7 +70,7 @@ async def on_message(message):
             # Implement this change.
             try:
                 # Prefix commands take priority over standard text commands
-                await client.send_message(message.channel, prefixMessageIndex[PREFIX+msg])
+                await client.send_message(message.channel, prefixMessageIndex[(PREFIX + msg)])
             except:
                 try:
                     await client.send_message(message.channel, messageIndex[msg])
