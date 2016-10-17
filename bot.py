@@ -56,7 +56,8 @@ async def on_message(message):
 
             # Send the URL of the image from the JSON fetched above.
             # The title text is half of the comic
-            await client.send_message(message.channel, r.json()['alt']+'\n'+r.json()['img'])
+            await client.send_message(message.channel, r.json()['img'])
+            await client.send_message(message.channel, r.json()['alt'])
         elif msg == (PREFIX + 'update'):
             # Confirm that the bot is updating
             await client.send_message(message.channel, 'Updating...')
