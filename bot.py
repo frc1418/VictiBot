@@ -4,7 +4,7 @@ import asyncio
 import subprocess
 import requests
 import json
-
+import loop
 # Initialize bot client
 # TODO: Make bot a class like normal bots.
 client = discord.Client()
