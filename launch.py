@@ -1,6 +1,5 @@
 execute = True
 while execute == True:
-    try:
-        execfile('bot.py')
-    except:
-        print "an error occurred"
+    with open("bot.py") as f:
+        code = compile(f.read(), "bot.py", 'exec')
+        exec(code, global_vars, local_vars)
