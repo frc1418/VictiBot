@@ -3,4 +3,4 @@ while execute == True:
     try:
         execfile('bot.py')
     except:
-        pass
+        print "an error occurred"
