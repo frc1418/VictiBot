@@ -64,6 +64,8 @@ async def on_message(message):
             # Start a git pull to update bot
             print(str(subprocess.Popen('git pull', shell=True, stdout=subprocess.PIPE).stdout.read()))
             # Rage quit
+            loop.stop()
+            loop.close()
             quit()
             sys.exit()
             exit()

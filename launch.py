@@ -5,4 +5,4 @@ while execute == True:
             code = compile(f.read(), "bot.py", 'exec')
             exec(code)
         except:
-            pass
+            print ("an error ocurred")
