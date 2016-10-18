@@ -68,6 +68,7 @@ async def on_message(message):
             quit()
             sys.exit()
             exit()
+            subprocess.Popen('touch run; echo "1" | cat >run', shell=True, stdout=subprocess.PIPE).stdout.read()
         else:
             # Respond if the message has a basic, static response.
             # TODO: Apparently 'await' has been replaced in py3 with 'yield from'.
