@@ -4,6 +4,7 @@ import asyncio
 import subprocess
 import requests
 import json
+import os
 # Initialize bot client
 # TODO: Make bot a class like normal bots.
 client = discord.Client()
@@ -68,7 +69,7 @@ async def on_message(message):
             quit()
             sys.exit()
             exit()
-            subprocess.Popen('touch run; echo "1" | cat >run', shell=True, stdout=subprocess.PIPE).stdout.read()
+            os.system('python3 launch.py')
         else:
             # Respond if the message has a basic, static response.
             # TODO: Apparently 'await' has been replaced in py3 with 'yield from'.
