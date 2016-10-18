@@ -74,7 +74,7 @@ async def on_message(message):
             try:
                 # Prefix commands take priority over standard text commands
                 await client.send_message(message.channel, prefixMessageIndex[(PREFIX + msg)])
-                print 'Prefix Done'
+                print ('Prefix Done')
             except:
                 try:
                     await client.send_message(message.channel, messageIndex[msg])
