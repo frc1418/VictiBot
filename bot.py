@@ -71,11 +71,15 @@ async def on_message(message):
             # Respond if the message has a basic, static response.
             # TODO: Apparently 'await' has been replaced in py3 with 'yield from'.
             # Implement this change.
-            
-            # Prefix commands take priority over standard text commands
-            await client.send_message(message.channel, prefixMessageIndex[(PREFIX + msg)])
-            print ('Prefix Done')
-            await client.send_message(message.channel, messageIndex[msg])
+            try:
+                # Prefix commands take priority over standard text commands
+                await client.send_message(message.channel, prefixMessageIndex[(msg)])
+                print ('Prefix Done')
+            except:
+                try:
+                    await client.send_message(message.channel, messageIndex[msg])
+                except:
+                    pass
 
 
 @client.event
