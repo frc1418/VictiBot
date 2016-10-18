@@ -65,10 +65,7 @@ async def on_message(message):
             # Start a git pull to update bot
             print(str(subprocess.Popen('git pull', shell=True, stdout=subprocess.PIPE).stdout.read()))
             await client.send_message(message.channel, 'Update Successful! Restarting...')
-            # Rage quit
-            quit()
-            sys.exit()
-            exit()
+            # Restart
             os.system('python3 launch.py')
         else:
             # Respond if the message has a basic, static response.
