@@ -1,5 +1,3 @@
-execute = True
-while execute == True:
-    with open("bot.py") as f:
-        code = compile(f.read(), "bot.py", 'exec')
-        exec(code)
+import os
+os.system('killall bot')
+os.system('python3 bot.py')
