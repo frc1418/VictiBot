@@ -26,6 +26,7 @@ messageIndex = {
     'xcq': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     'it\'s time to stop': 'https://www.youtube.com/watch?v=2k0SmqbBIpQ',
     'stop': 'https://www.youtube.com/watch?v=2k0SmqbBIpQ'
+    'harambe' : ':harambe:'
 }
 
 
