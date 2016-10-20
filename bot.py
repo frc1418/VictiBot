@@ -16,17 +16,17 @@ PREFIX = '!'
 # data-driven) interactions aren't stored here, those go below.
 prefixMessageIndex = {
     # Returns the corresponding value if preceeded by the PREFIX
-    'ping': 'Pong!',
-    'hello': 'World!',
-    'balloumoji': ':bigdissapointment::moustache::ballouminatti::1982::nope::notapproved::fedora1::happy::flowers::notbad::soundboard:'
+    PREFIX + 'ping': 'Pong!',
+    PREFIX + 'hello': 'World!',
+    PREFIX + 'balloumoji': '<:bigdissapointment:236086062617853953><:moustache:236092022312665089><:ballouminatti:236132317603561475><:1982:236092769779712000><:nope:236096818180653057><:notapproved:236096861113417728><:fedora1:236131582468030474><:happy:236137265305223168><:flowers:236139383764418560><:notbad:236140764416049152><:soundboard:236147928547328000>',
+    
 }
 messageIndex = {
     # Returns the corresponding text unless it interferes with a command beginning with the PREFIX
     'rickroll': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     'xcq': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     'it\'s time to stop': 'https://www.youtube.com/watch?v=2k0SmqbBIpQ',
-    'stop': 'https://www.youtube.com/watch?v=2k0SmqbBIpQ',
-    'harambe' : ':harambe:'
+    'stop': 'https://www.youtube.com/watch?v=2k0SmqbBIpQ'
 }
 
 
@@ -78,7 +78,7 @@ async def on_message(message):
             # Implement this change.
             try:
                 # Prefix commands take priority over standard text commands
-                await client.send_message(message.channel, prefixMessageIndex[(msg[1:])])
+                await client.send_message(message.channel, prefixMessageIndex[(msg)])
                 print ('Prefix Done')
             except:
                 try:
