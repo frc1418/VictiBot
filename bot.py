@@ -9,6 +9,7 @@ import os
 # TODO: Make bot a class like normal bots.
 client = discord.Client()
 lastId = subprocess.Popen('cat LastId', shell=True, stdout=subprocess.PIPE).stdout.read()
+print lastId
 #bot prefix
 PREFIX = '!'
 
