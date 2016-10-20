@@ -71,7 +71,6 @@ async def on_message(message):
             os.system('python3 launch.py')
         elif message.content.isupper() and len(message.content) > 5:
             #if someone sends a message in all caps, respond with a friendly reminder
-            print("caps")
             await client.send_message(message.channel, "did that _really_ need to be in all caps?")
         else:
             # Respond if the message has a basic, static response.
