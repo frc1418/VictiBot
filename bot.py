@@ -29,6 +29,20 @@ messageIndex = {
     'stop': 'https://www.youtube.com/watch?v=2k0SmqbBIpQ'
 }
 
+helpMessage = """Welcome to VictiBot!
+              The commands are
+              !ping
+              !hello
+              !balloumoji
+              !about
+              !help
+              rickroll
+              xcq
+              it\'s time to stop
+              stop
+              
+              Type one of these into the chat to try it out"""
+
 
 @client.event
 async def on_ready():
@@ -42,7 +56,6 @@ async def on_ready():
 @client.event
 async def on_message(message):
     """Catch a user's messages and figure out what to return."""
-
     msg = message.content.lower()
 
     # Only send back message if user that sent the triggering message isn't a bot
@@ -72,6 +85,8 @@ async def on_message(message):
         elif message.content.isupper() and len(message.content) > 5:
             #if someone sends a message in all caps, respond with a friendly reminder
             await client.send_message(message.channel, "did that _really_ need to be in all caps?")
+        elif msg.startswith('!help'):
+            await client.send_message(message.author, helpMessage)
         else:
             # Respond if the message has a basic, static response.
             # TODO: Apparently 'await' has been replaced in py3 with 'yield from'.
