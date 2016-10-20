@@ -26,7 +26,7 @@ messageIndex = {
     'xcq': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     'it\'s time to stop': 'https://www.youtube.com/watch?v=2k0SmqbBIpQ',
     'stop': 'https://www.youtube.com/watch?v=2k0SmqbBIpQ',
-    'harambe' : ' :harambe: '
+    'harambe' : ':harambe:'
 }
 
 
@@ -36,8 +36,8 @@ async def on_ready():
     print('Logged in as ' + client.user.name + ' (ID ' + client.user.id + ').')
     print('------')
     # Turns out this is annoying
-    await client.send_message(client.get_channel('228121885630529536'), 'Victibot is online and ready! Currently running as ' + client.user.name + ' (ID ' + client.user.id + ').')
-    await client.send_message(client.get_channel('238267526792871936'), 'Victibot is online and ready! Currently running as ' + client.user.name + ' (ID ' + client.user.id + ').')
+    #await client.send_message(client.get_channel('228121885630529536'), 'Victibot is online and ready! Currently running as ' + client.user.name + ' (ID ' + client.user.id + ').')
+
 
 @client.event
 async def on_message(message):
