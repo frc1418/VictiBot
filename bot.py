@@ -19,7 +19,8 @@ prefixMessageIndex = {
     # Returns the corresponding value if preceeded by the PREFIX
     'ping': 'Pong!',
     'hello': 'World!',
-    'balloumoji': ':bigdissapointment::moustache::ballouminatti::1982::nope::notapproved::fedora1::happy::flowers::notbad::soundboard:'
+    'balloumoji': '<:bigdissapointment:236086062617853953><:moustache:236092022312665089><:ballouminatti:236132317603561475><:1982:236092769779712000><:nope:236096818180653057><:notapproved:236096861113417728><:fedora1:236131582468030474><:happy:236137265305223168><:flowers:236139383764418560><:notbad:236140764416049152><:soundboard:236147928547328000>',
+    
 }
 messageIndex = {
     # Returns the corresponding text unless it interferes with a command beginning with the PREFIX
