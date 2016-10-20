@@ -8,7 +8,7 @@ import os
 # Initialize bot client
 # TODO: Make bot a class like normal bots.
 client = discord.Client()
-
+lastId = subprocess.Popen('cat LastId', shell=True, stdout=subprocess.PIPE).stdout.read()
 #bot prefix
 PREFIX = '!'
 
@@ -36,9 +36,9 @@ async def on_ready():
     print('Logged in as ' + client.user.name + ' (ID ' + client.user.id + ').')
     print('------')
     # Turns out this is annoying
-    await client.send_message(client.get_channel('228121885630529536'), 'Victibot is online and ready! Currently running as ' + client.user.name + ' (ID ' + client.user.id + ').')
-    await client.send_message(client.get_channel('238267526792871936'), 'Victibot is online and ready! Currently running as ' + client.user.name + ' (ID ' + client.user.id + ').')
-
+    #await client.send_message(client.get_channel('228121885630529536'), 'Victibot is online and ready! Currently running as ' + client.user.name + ' (ID ' + client.user.id + ').')
+    #await client.send_message(client.get_channel('238267526792871936'), 'Victibot is online and ready! Currently running as ' + client.user.name + ' (ID ' + client.user.id + ').')
+    await client.send_message(client.get_channel(lastId), 'Victibot is online and ready! Currently running as ' + client.user.name + ' (ID ' + client.user.id + ').')
 @client.event
 async def on_message(message):
     """Catch a user's messages and figure out what to return."""
@@ -67,6 +67,7 @@ async def on_message(message):
             # Start a git pull to update bot
             print(str(subprocess.Popen('git pull', shell=True, stdout=subprocess.PIPE).stdout.read()))
             await client.send_message(message.channel, 'Update Successful! Restarting...')
+            subprocess.Popen('echo ' + message.channel + ' | cat > LastId', shell=True, stdout=subprocess.PIPE).stdout.read()
             # Restart
             os.system('python3 launch.py')
         else:
