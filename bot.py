@@ -71,7 +71,7 @@ async def on_message(message):
             os.system('python3 launch.py')
         elif msg.isUpper() and msg.len() > 5:
             #if someone sends a message in all caps, respond with a friendly reminder
-            await client.send_message(message.channel "did that _really_ need to be in all caps? ")
+            await client.send_message(message.channel, "did that _really_ need to be in all caps? ")
         else:
             # Respond if the message has a basic, static response.
             # TODO: Apparently 'await' has been replaced in py3 with 'yield from'.
