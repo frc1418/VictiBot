@@ -73,17 +73,19 @@ def on_message(message):
             # The title text is half of the comic
             yield from client.send_message(message.channel, r.json()['img'])
             yield from client.send_message(message.channel, r.json()['alt'])
+        elif msg.startswith(PREFIX + 'nasa'):
+            # Grab JSON data from apod
+            r = requests.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
+
+            # Send URL for image along with image's title
+            yield from client.send_message(message.channel, r.json()['url'])
+            yield from client.send_message(message.channel, r.json()['title'])
         elif msg == (PREFIX + 'update'):
             # Confirm that the bot is updating
             yield from client.send_message(message.channel, 'Updating...')
             # Start a git pull to update bot
             print(str(subprocess.Popen('git pull', shell=True, stdout=subprocess.PIPE).stdout.read()))
-<<<<<<< HEAD
-            await client.send_message(message.channel, 'Update Successful! Restarting...')
-            subprocess.Popen('echo ' + message.channel + ' | cat > LastId', shell=True, stdout=subprocess.PIPE).stdout.read()
-=======
             yield from client.send_message(message.channel, 'Update Successful! Restarting...')
->>>>>>> 01f24c6... Removed deprecated keywords
             # Restart
             os.system('python3 launch.py')
         elif message.content.isupper() and len(message.content) > 5:
