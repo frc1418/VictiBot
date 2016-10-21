@@ -19,7 +19,7 @@ prefixMessageIndex = {
     PREFIX + 'ping': 'Pong!',
     PREFIX + 'hello': 'World!',
     PREFIX + 'balloumoji': '<:bigdissapointment:236086062617853953><:moustache:236092022312665089><:ballouminatti:236132317603561475><:1982:236092769779712000><:nope:236096818180653057><:notapproved:236096861113417728><:fedora1:236131582468030474><:happy:236137265305223168><:flowers:236139383764418560><:notbad:236140764416049152><:soundboard:236147928547328000>',
-    
+
 }
 messageIndex = {
     # Returns the corresponding text unless it interferes with a command beginning with the PREFIX
@@ -40,7 +40,7 @@ helpMessage = """Welcome to VictiBot!
               xcq
               it\'s time to stop
               stop
-              
+
               Type one of these into the chat to try it out"""
 
 
@@ -74,6 +74,13 @@ def on_message(message):
             # The title text is half of the comic
             yield from client.send_message(message.channel, r.json()['img'])
             yield from client.send_message(message.channel, r.json()['alt'])
+        elif msg.startswith(PREFIX + 'nasa'):
+            # Grab JSON data from apod
+            r = requests.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
+
+            # Send URL for image along with image's title
+            yield from client.send_message(message.channel, r.json()['url'])
+            yield from client.send_message(message.channel, r.json()['title'])
         elif msg == (PREFIX + 'update'):
             # Confirm that the bot is updating
             yield from client.send_message(message.channel, 'Updating...')
