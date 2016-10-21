@@ -87,7 +87,8 @@ def on_message(message):
             print(str(subprocess.Popen('git pull', shell=True, stdout=subprocess.PIPE).stdout.read()))
             yield from client.send_message(message.channel, 'Update Successful! Restarting...')
             # Restart
-            os.system('python3 launch.py')
+            subprocess.Popen('python3 bot.py', shell=True, stdin=None, stdout=None, stderr=None, close_fds=True)
+            os.abort()
         elif message.content.isupper() and len(message.content) > 5:
             # if someone sends a message in all caps, respond with a friendly reminder
             yield from client.send_message(message.channel, "did that _really_ need to be in all caps?")
