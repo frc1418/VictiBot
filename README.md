@@ -12,7 +12,7 @@ A work in progress. Feel free to suggest features in the issues.
 
 
 ## Running
-1. Add the appropriate token to the last line of `bot.py`.
+1. Write the token to the contents of text file 'token.txt' in the victibot directory
 2. While in `victibot` directory, run:
 
         python3 bot.py
