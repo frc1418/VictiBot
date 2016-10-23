@@ -9,9 +9,7 @@ import os
 # TODO: Make bot a class like normal bots.
 client = discord.Client()
 
-
 # bot prefix
->>>>>>> frc1418/master
 PREFIX = '!'
 
 # Two dictionaries (prefix commands and text triggers) of basic things for the bot to return. More complex (i.e.
@@ -52,14 +50,6 @@ def on_ready():
     print('Logged in as ' + client.user.name + ' (ID ' + client.user.id + ').')
     print('------')
     # Turns out this is annoying
-
-    #await client.send_message(client.get_channel('228121885630529536'), 'Victibot is online and ready! Currently running as ' + client.user.name + ' (ID ' + client.user.id + ').')
-    #await client.send_message(client.get_channel('238267526792871936'), 'Victibot is online and ready! Currently running as ' + client.user.name + ' (ID ' + client.user.id + ').')
-    await client.send_message(client.get_channel(228121885630529536), 'Victibot is online and ready! Currently running as ' + client.user.name + ' (ID ' + client.user.id + ').')
-@client.event
-async def on_message(message):
-    """Catch a user's messages and figure out what to return."""
-
     # yield from client.send_message(client.get_channel('228121885630529536'), 'Victibot is online and ready! Currently running as ' + client.user.name + ' (ID ' + client.user.id + ').')
 
 
@@ -96,9 +86,7 @@ def on_message(message):
             yield from client.send_message(message.channel, 'Updating...')
             # Start a git pull to update bot
             print(str(subprocess.Popen('git pull', shell=True, stdout=subprocess.PIPE).stdout.read()))
-
             yield from client.send_message(message.channel, 'Update Successful! Restarting...')
-
             # Restart
             subprocess.Popen('python3 bot.py', shell=True, stdin=None, stdout=None, stderr=None, close_fds=True)
             os.abort()
