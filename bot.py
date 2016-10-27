@@ -12,36 +12,17 @@ client = discord.Client()
 # bot prefix
 PREFIX = '!'
 
-# Two dictionaries (prefix commands and text triggers) of basic things for the bot to return. More complex (i.e.
+# Dictionary of basic things for the bot to return. More complex (i.e.
 # data-driven) interactions aren't stored here, those go below.
-prefixMessageIndex = {
-    # Returns the corresponding value if preceeded by the PREFIX
+message_index = {
     PREFIX + 'ping': 'Pong!',
     PREFIX + 'hello': 'World!',
-    PREFIX + 'balloumoji': '<:bigdissapointment:236086062617853953><:moustache:236092022312665089><:ballouminatti:236132317603561475><:1982:236092769779712000><:nope:236096818180653057><:notapproved:236096861113417728><:fedora1:236131582468030474><:happy:236137265305223168><:flowers:236139383764418560><:notbad:236140764416049152><:soundboard:236147928547328000>',
-
-}
-messageIndex = {
+    PREFIX + 'balloumoji': '<:bigdissapointment:236086062617853953><:moustache:236092022312665089><:ballouminatti:236132317603561475><:1982:236092769779712000><:nope:236096818180653057><:notapproved:236096861113417728><:fedora1:236131582468030474><:happy:236137265305223168><:flowers:236139383764418560><:timmyffs:237378458366377986><:notbad:236140764416049152><:soundboard:236147928547328000>',
     # Returns the corresponding text unless it interferes with a command beginning with the PREFIX
     'rickroll': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-    'xcq': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     'it\'s time to stop': 'https://www.youtube.com/watch?v=2k0SmqbBIpQ',
     'stop': 'https://www.youtube.com/watch?v=2k0SmqbBIpQ'
 }
-
-helpMessage = """Welcome to VictiBot!
-              The commands are
-              !ping
-              !hello
-              !balloumoji
-              !about
-              !help
-              rickroll
-              xcq
-              it\'s time to stop
-              stop
-
-              Type one of these into the chat to try it out"""
 
 
 @client.async_event
@@ -49,8 +30,8 @@ def on_ready():
     """Run when the bot is ready."""
     print('Logged in as ' + client.user.name + ' (ID ' + client.user.id + ').')
     print('------')
-    # Turns out this is annoying
-    # yield from client.send_message(client.get_channel('228121885630529536'), 'Victibot is online and ready! Currently running as ' + client.user.name + ' (ID ' + client.user.id + ').')
+    # Uncomment to instantly piss off everyone
+    #yield from client.send_message(client.get_channel('228121885630529536'), 'Victibot is online and ready! Currently running as ' + client.user.name + ' (ID ' + client.user.id + ').')
 
 
 @client.async_event
@@ -90,34 +71,26 @@ def on_message(message):
             # Restart
             subprocess.Popen('python3 bot.py', shell=True, stdin=None, stdout=None, stderr=None, close_fds=True)
             os.abort()
-        elif message.content.isupper() and len(message.content) > 5:
-            # if someone sends a message in all caps, respond with a friendly reminder
-            yield from client.send_message(message.channel, "did that _really_ need to be in all caps?")
         elif msg.startswith('!help'):
-            yield from client.send_message(message.author, helpMessage)
+            # PM the user a help message.
+            yield from client.send_message(message.author, '**Welcome to VictiBot!**\n\nCommands:\n\n    - !ping\n    - !hello\n    - !balloumoji\n    - !about\n    - !help\n    - rickroll\n    - it\'s time to stop\n    - stop\n\nType one of these into the chat to try it out!')
         else:
             # Respond if the message has a basic, static response.
-            # TODO: Apparently 'yield from' has been replaced in py3 with 'yield from'.
-            # Implement this change.
             try:
                 # Prefix commands take priority over standard text commands
-                yield from client.send_message(message.channel, prefixMessageIndex[(msg)])
-                print ('Prefix Done')
+                yield from client.send_message(message.channel, message_index[(msg)])
             except:
-                try:
-                    yield from client.send_message(message.channel, messageIndex[msg])
-                except:
-                    pass
+                pass
 
 
 @client.async_event
 def on_member_join(member):
-    yield from client.send_message(member.server.default_channel, '**Welcome ' + member.mention + ' to the ' + member.server.name + ' server!**')
+    yield from client.send_message(member.server.default_channel, '**Welcome ' + member.mention + ' to the server!**')
 
 
 @client.async_event
 def on_member_remove(member):
-    yield from client.send_message(member.server.default_channel, member.name + ' left the server :frowning: RIP ' + member.name)
+    yield from client.send_message(member.server.default_channel, member.name + ' has left the server. :frowning:')
 
 
 # Get token from token.txt.
