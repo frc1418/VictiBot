@@ -1,18 +1,16 @@
 # VictiBot
+A simple chatbot for Team 1418's Discord server.
 
-A simple chatbot for Vae Victis Team 1418's Discord server.
-
-A work in progress. Feel free to suggest features in the issues.
 
 ## Dependencies
 * [Python 3](https://www.python.org/downloads)
-* `discord.py`
+* Python packages:
 
-        pip3 install discord.py
+        pip3 install -r requirements.txt
 
 
 ## Running
-1. Write the token to the contents of text file 'token.txt' in the victibot directory
+1. Write a valid token to `token.txt` in the victibot directory.
 2. While in `victibot` directory, run:
 
         python3 bot.py
@@ -22,7 +20,6 @@ A work in progress. Feel free to suggest features in the issues.
 * [Erik Boesen](https://github.com/ErikBoesen)
 * [Adrian Hall](https://github.com/Aderhall)
 
-## License
-This software is protected under the MIT License. Basically, be nice and give credit where such is due. Oh, and also, if you use this bot to do evil things, we're not liable.
 
-More information in `LICENSE`.
+## License
+This software is protected under the [MIT License](LICENSE).
