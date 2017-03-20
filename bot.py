@@ -26,8 +26,12 @@ class VictiBot(discord.Client):
         """Catch a user's messages and figure out what to return."""
         # Use regex to match the command at the starting of a
         # TODO: Figure out how to match this directly without substringing.
-        cmd = re.search(r'^!(\w+)', message.content).group(0)[1:]
-        content = message.content[len(cmd)+2:]
+        try:
+            cmd = re.search(r'^!(\w+)', message.content).group(0)[1:]
+            content = message.content[len(cmd)+2:]  # The 2 is for the ! and the space after the command.
+        except AttributeError:
+            cmd = None
+            content = None
 
         # Only send back message if user that sent the triggering message isn't a bot
         if not message.author.bot and cmd is not None:
