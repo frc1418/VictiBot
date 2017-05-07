@@ -10,8 +10,8 @@ A simple chatbot for Team 1418's Discord server.
 
 
 ## Running
-1. Write a valid token to `token.txt` in the victibot directory.
-2. While in `victibot` directory, run:
+1. Write a valid token to `token.txt` in the `VictiBot` directory.
+2. While in `VictiBot` directory, run:
 
         python3 bot.py
 
