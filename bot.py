@@ -22,6 +22,8 @@ class VictiBot(discord.Client):
         print('Logged in as ' + self.user.name + ' (ID ' + self.user.id + ').')
         print('------')
 
+        await self.change_presence(status=discord.Status.dnd, game=discord.Game(name='fork me on GitHub @ frc1418/VictiBot!'))
+
     async def on_message(self, message):
         """Catch a user's messages and figure out what to return."""
         # Use regex to match the command at the starting of a
@@ -40,19 +42,18 @@ class VictiBot(discord.Client):
                 await self.send_message(message.channel, 'VictiBot is a chatbot for Team 1418\'s Discord server. Bot is currently running as ' + self.user.name + ' (ID ' + self.user.id + '). View on GitHub: https://github.com/frc1418/victibot')
             elif cmd == 'xkcd':
                 # If the user included a specific comic number in their message, get the JSON data for that comic. Otherwise, get the JSON data for the most recent comic.
-                r = requests.get('http://xkcd.com/' + content + '/info.0.json' if content else 'http://xkcd.com/info.0.json')
+                comic = requests.get('http://xkcd.com/' + content + '/info.0.json' if content else 'http://xkcd.com/info.0.json').json()
 
-                # Send the URL of the image from the JSON fetched above.
-                # The title text is half of the comic
-                await self.send_message(message.channel, r.json()['img'])
-                await self.send_message(message.channel, r.json()['alt'])
+                # Send the URL and hover text of the comic.
+                await self.send_message(message.channel, comic['img'])
+                await self.send_message(message.channel, comic['alt'])
             elif cmd == 'nasa':
-                # Grab JSON data from apod
-                r = requests.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
+                # Get JSON data from apod
+                photo = requests.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY').json()
 
                 # Send URL for image along with image's title
-                await self.send_message(message.channel, r.json()['url'])
-                await self.send_message(message.channel, r.json()['title'])
+                await self.send_message(message.channel, photo['url'])
+                await self.send_message(message.channel, photo['title'])
             elif cmd == 'update':
                 # Confirm that the bot is updating
                 await self.send_message(message.channel, 'Updating...')
@@ -68,12 +69,9 @@ class VictiBot(discord.Client):
             else:
                 # Respond if the message has a basic, static response.
                 try:
-                    # Prefix commands take priority over standard text commands
-                    await self.send_message(message.channel, {
-                        'ping': 'Pong!',
-                        'hello': 'World!',
-                        'balloumoji': '<:bigdissapointment:236086062617853953><:moustache:236092022312665089><:ballouminatti:236132317603561475><:1982:236092769779712000><:nope:236096818180653057><:notapproved:236096861113417728><:fedora1:236131582468030474><:happy:236137265305223168><:flowers:236139383764418560><:timmyffs:237378458366377986><:notbad:236140764416049152><:soundboard:236147928547328000>',
-                    }[cmd])
+                    with open('commands.json') as f:
+                        commands = json.load(f)
+                    await self.send_message(message.channel, commands[cmd])
                 except KeyError:
                     pass
 
