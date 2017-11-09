@@ -1,4 +1,5 @@
-token.txt
+*.txt
+*.ini
 Icon
 
 # Byte-compiled / optimized / DLL files

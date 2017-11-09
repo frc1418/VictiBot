@@ -1,5 +1,6 @@
 import discord
 import asyncio
+import configparser
 import requests
 import json
 import os
@@ -8,11 +9,6 @@ import re
 
 class VictiBot(discord.Client):
     def __init__(self):
-        """
-        Initialize bot.
-
-        :param token: Bot account token.
-        """
         super().__init__()
 
         print('Starting VictiBot...')
@@ -93,7 +89,8 @@ class VictiBot(discord.Client):
 
 
 if __name__ == '__main__':
-    token = open('token.txt', 'r').read().replace('\n', '')
+    config = configparser.ConfigParser()
+    config.read('config.ini')
 
     victibot = VictiBot()
-    victibot.run(token)
+    victibot.run(config['bot']['token'])
