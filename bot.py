@@ -3,7 +3,6 @@ import asyncio
 import configparser
 import requests
 import json
-import os
 import re
 
 
@@ -50,15 +49,6 @@ class VictiBot(discord.Client):
                 # Send URL for image along with image's title
                 await self.send_message(message.channel, photo['url'])
                 await self.send_message(message.channel, photo['title'])
-            elif cmd == 'update':
-                # Confirm that the bot is updating
-                await self.send_message(message.channel, 'Updating...')
-                # Start a git pull to update bot
-                print(str(subprocess.Popen('git pull', shell=True, stdout=subprocess.PIPE).stdout.read()))
-                await self.send_message(message.channel, 'Update Successful! Restarting...')
-                # Restart
-                subprocess.Popen('python3 bot.py', shell=True, stdin=None, stdout=None, stderr=None, close_fds=True)
-                os.abort()
             elif cmd == 'help':
                 # PM the user a help message.
                 await self.send_message(message.author, open('help.md').read())
