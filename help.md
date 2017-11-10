@@ -5,6 +5,8 @@ Commands:
     - !ping
     - !hello
     - !balloumoji
+    - !xkcd
+    - !nasa
     - !about
     - !help
 
