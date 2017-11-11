@@ -1,5 +1,6 @@
-# VictiBot
-A simple chatbot for Team 1418's Discord server.
+<img src="logo.png" height="160">
+
+> A simple chatbot for Team 1418's Discord server.
 
 ## Dependencies
 * [Python 3](https://www.python.org/downloads)
