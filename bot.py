@@ -7,10 +7,12 @@ import re
 
 
 class VictiBot(discord.Client):
-    def __init__(self):
+    def __init__(self, config):
         super().__init__()
+        self.config = config
 
         print('Starting VictiBot...')
+        self.run(self.config['token'])
 
     async def on_ready(self):
         """Run when the bot is ready."""
@@ -25,26 +27,26 @@ class VictiBot(discord.Client):
         # TODO: Figure out how to match this directly without substringing.
         try:
             cmd = re.search(r'^!(\w+)', message.content).group(0)[1:]
-            content = message.content[len(cmd)+2:]  # The 2 is for the ! and the space after the command.
+            content = message.content[len(cmd)+2:].split(' ')  # The 2 is for the ! and the space after the command.
         except AttributeError:
             cmd = None
             content = None
 
         # Only send back message if user that sent the triggering message isn't a bot
         if not message.author.bot and cmd is not None:
-            print('Recieved command %s' % cmd)
+            print('RECIEVED: %s, %s from %s' % (cmd, content, message.author))
             if cmd == 'about':
                 await self.send_message(message.channel, 'VictiBot is a chatbot for Team 1418\'s Discord server. Bot is currently running as ' + self.user.name + ' (ID ' + self.user.id + '). View on GitHub: https://github.com/frc1418/victibot')
             elif cmd == 'xkcd':
                 # If the user included a specific comic number in their message, get the JSON data for that comic. Otherwise, get the JSON data for the most recent comic.
-                comic = requests.get('http://xkcd.com/' + content + '/info.0.json' if content else 'http://xkcd.com/info.0.json').json()
+                comic = requests.get('http://xkcd.com/' + content[0] + '/info.0.json' if content else 'http://xkcd.com/info.0.json').json()
 
                 # Send the URL and hover text of the comic.
                 await self.send_message(message.channel, comic['img'])
                 await self.send_message(message.channel, comic['alt'])
             elif cmd == 'nasa':
-                # Get JSON data from apod
-                photo = requests.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY').json()
+                # Get JSON data from NASA APOD API
+                photo = requests.get('https://api.nasa.gov/planetary/apod?api_key=%s' % (self.config['apod_key'] if self.config['apod_key'] else 'DEMO_KEY')).json()
 
                 # Send URL for image along with image's title
                 await self.send_message(message.channel, photo['url'])
@@ -82,5 +84,4 @@ if __name__ == '__main__':
     config = configparser.ConfigParser()
     config.read('config.ini')
 
-    victibot = VictiBot()
-    victibot.run(config['bot']['token'])
+    victibot = VictiBot(config['bot'])
