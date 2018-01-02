@@ -71,16 +71,11 @@ class VictiBot(discord.Client):
                     except KeyError:
                         pass
 
-            if message.channel.name == 'github':
-                print('Message recieved in #github from ' + message.author.name)
-                contains_hook = False
-                async for msg in self.logs_from(message.channel, limit=6):
-                    if msg.author.name == 'GitHub':
-                        contains_hook = True
-                        break
-                if not contains_hook:
-                    print('No hook found in past 6 messages, sending warning.')
-                    await self.send_message(message.channel, 'Psst... you may want to move to %s.' % self.get_channel('228121923245178880').mention)
+            # If message was sent in the #github webhook channel and no recent message was a webhook notification,
+            # suggest that author move to #programming.
+            if message.channel.name == 'github' and all([not msg.author.bot async for msg in self.logs_from(message.channel, limit=6)]):
+                print('No hook found in recent #github messages, sending warning.')
+                await self.send_message(message.channel, 'Psst... you may want to move to <#228121923245178880>.')
 
     async def on_member_join(self, member):
         """
