@@ -23,7 +23,14 @@ class VictiBot(discord.Client):
 
     async def on_message(self, message):
         """Catch a user's messages and figure out what to return."""
-        # Use regex to match the command at the starting of a
+
+        # Log message
+        print('- {time} | #{channel} | {user}: {message}'.format(time=message.timestamp.strftime('%y:%m:%d:%H:%M:%S'),
+                                                                 channel=message.channel.name,
+                                                                 user=message.author.name,
+                                                                 message=message.content))
+
+        # Use regex to match the command at the starting of message
         # TODO: Figure out how to match this directly without substringing.
         try:
             cmd = re.search(r'^!(\w+)', message.content).group(0)[1:]
@@ -35,7 +42,7 @@ class VictiBot(discord.Client):
         # Only send back message if user that sent the triggering message isn't a bot
         if not message.author.bot:
             if cmd is not None:
-                print('RECIEVED: %s, %s from %s' % (cmd, content, message.author))
+                print('INSTRUCTION: %s, %s from %s' % (cmd, content, message.author))
                 if cmd == 'about':
                     await self.send_message(message.channel, 'VictiBot is a chatbot for Team 1418\'s Discord server. Bot is currently running as ' + self.user.name + ' (ID ' + self.user.id + '). View on GitHub: https://github.com/frc1418/victibot')
                 elif cmd == 'xkcd':
